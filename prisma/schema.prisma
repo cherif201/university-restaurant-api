@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// prisma/schema.prisma
+// prisma/schema.prisma
+datasource db {
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+  // uncomment next line if you use Prisma <5.10
+  // directUrl = env("DATABASE_URL_UNPOOLED")
+}
+ model User{
+  id       Int   @id @default(autoincrement())
+  username String   @unique
+  role  role
+  email    String   @unique
+  password String?
+  isVerified        Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Post Post[]
+  Vote Vote[]
+  UserPrefs UserPrefs[]
+  Report Report[]
+}
+ enum role {
+  STUDENT
+  CHEF
+ }
+ model UserPrefs {
+  id Int @default(autoincrement()) @id
+  eatsSalad Boolean
+  eatsBread Boolean
+  user User @relation(fields: [userId], references: [id])
+  userId Int @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id Int @default(autoincrement()) @id
+  title String
+  description String
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  vote Vote[]
+
+  Report Report[]
+}
+model Vote {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  postId    Int
+  voteType  String   
+  user      User     @relation(fields: [userId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  @@unique([userId, postId])
+}
+model Report {
+  id        Int      @id @default(autoincrement())
+  reason    String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    Int
+  createdAt DateTime @default(now())
+  @@unique([userId, postId])  
+}
+model DailyMenu {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  date        DateTime @default(now())
+}
+
