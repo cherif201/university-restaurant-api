@@ -46,17 +46,6 @@ export class PostsController {
  
 
 
-  /**
-   * UPVOTE a Post
-   * 
-   * Route: POST /posts/:postId/upvote
-   * Body: { "userId": number }
-   * 
-   * Example Body:
-   *   {
-   *     "userId": 123
-   *   }
-   */
   @Post(':postId/upvote')
   async upvotePost(
     @Param('postId', ParseIntPipe) postId: number,
@@ -65,17 +54,7 @@ export class PostsController {
     return this.postsService.upvotePost(postId, userId);
   }
 
-  /**
-   * DOWNVOTE a Post
-   * 
-   * Route: POST /posts/:postId/downvote
-   * Body: { "userId": number }
-   * 
-   * Example Body:
-   *   {
-   *     "userId": 123
-   *   }
-   */
+  
   @Post(':postId/downvote')
   async downvotePost(
     @Param('postId', ParseIntPipe) postId: number,
@@ -84,12 +63,6 @@ export class PostsController {
     return this.postsService.downvotePost(postId, userId);
   }
 
-  /**
-   * GET total votes for a Post
-   * 
-   * Route: GET /posts/:postId/votes
-   * No body needed.
-   */
   @Get(':postId/votes')
   async getVotes(@Param('postId', ParseIntPipe) postId: number) {
     return this.postsService.getVotes(postId);
@@ -100,7 +73,7 @@ export class PostsController {
     @Post(':postId/report')
     async reportPost(
       @Param('postId', ParseIntPipe) postId: number,
-      @Body('userId', ParseIntPipe) userId: number,  // <--- Take user ID from the request body
+      @Body('userId', ParseIntPipe) userId: number,  
       @Body('reason') reason: string,
     ) {
       return this.postsService.reportPost(postId, userId, reason);

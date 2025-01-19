@@ -27,8 +27,7 @@ export class DailyMenuController {
   @ApiOperation({ summary: 'Create a daily menu (CHEF only)' })
   @ApiResponse({ status: 201, description: 'Daily menu created successfully.' })
   async create(@Body() dto: CreateDailyMenuDto, @Req() req: Request) {
-    const user = req.user as any; // or a typed User interface
-    // Convert dto.date if needed:
+    const user = req.user as any; 
     const parsedDate = dto.date ? new Date(dto.date) : undefined;
     return this.dailyMenuService.create(
       user,

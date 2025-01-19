@@ -4,8 +4,8 @@ import { INestApplication } from '@nestjs/common';
 
 export function setupSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
-    .setTitle('restapi') // Replace with your API title
-    .setDescription('Your API Description') // Replace with a short description
+    .setTitle('restapi') 
+    .setDescription('Your API Description') 
     .setVersion('1.0')
     // Add security configuration for Bearer Auth (JWT)
     .addBearerAuth(
@@ -17,7 +17,7 @@ export function setupSwagger(app: INestApplication) {
         description: 'Enter JWT token',
         in: 'header',
       },
-      'JWT-auth', // This name will be used in the @ApiBearerAuth() decorator
+      'JWT-auth', 
     )
     .build();
 
@@ -32,11 +32,5 @@ export function setupSwagger(app: INestApplication) {
         in: 'header',
       }
     },
-  
-  /*document.security = [
-    {
-      'JWT-auth': [], // Applies the 'JWT-auth' scheme globally
-    },
-  ];*/
   SwaggerModule.setup('api', app, document); // Swagger UI will be accessible at /api
 }

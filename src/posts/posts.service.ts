@@ -58,10 +58,9 @@ export class PostsService {
   
   // UPVOTE logic
   async upvotePost(postId: number, userId: number) {
-    // Check if there's already a vote by this user on this post
     const existingVote = await this.prisma.vote.findUnique({
       where: {
-        userId_postId: { userId, postId }, // Based on your @@unique compound field
+        userId_postId: { userId, postId }, 
       },
     });
 

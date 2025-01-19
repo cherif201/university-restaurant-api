@@ -15,7 +15,7 @@ export class DailyMenuService {
       data: {
         title,
         description,
-        date: date || new Date(), // Use provided date or default to now
+        date: date || new Date(), 
       },
     });
   }

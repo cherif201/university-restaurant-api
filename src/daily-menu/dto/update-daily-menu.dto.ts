@@ -16,5 +16,5 @@ export class UpdateDailyMenuDto {
   @ApiPropertyOptional({ description: 'New date for the daily menu', format: 'date-time' })
   @IsOptional()
   @IsDateString()
-  date?: string; // or Date
+  date?: string; 
 }

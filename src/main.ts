@@ -39,9 +39,9 @@ async function bootstrap() {
     },
   });
   app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,     // strip unknown properties
-    forbidNonWhitelisted: true, // throw error if unknown properties
-    transform: true,     // automatically transform payloads to DTO instances
+    whitelist: true,     
+    forbidNonWhitelisted: true, 
+    transform: true,     
   }));
   await app.listen(3000);
 }

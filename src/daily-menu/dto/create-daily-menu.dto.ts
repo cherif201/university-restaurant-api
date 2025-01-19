@@ -16,5 +16,5 @@ export class CreateDailyMenuDto {
   @ApiPropertyOptional({ description: 'Date for which the menu applies (defaults to now)', type: String, format: 'date-time' })
   @IsOptional()
   @IsDateString()
-  date?: string; // or Date, but typically we use string for request payload
+  date?: string; 
 }

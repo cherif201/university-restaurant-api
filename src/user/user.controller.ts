@@ -9,8 +9,6 @@ import {
   Patch,
   UseGuards,
   Req,
-  Query,
-  ForbiddenException,
   Delete,
 } from '@nestjs/common';
 import {
@@ -34,7 +32,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   /**
-   * GET all users (CHEF only).
+    GET all users (CHEF only).
    */
   @Get()
   @ApiOperation({ summary: 'Get all users (CHEF only)' })
